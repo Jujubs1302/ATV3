@@ -1,0 +1,36 @@
+import wx
+
+class Frame(wx.Frame):
+    def __init__(self):
+        global peso, a2
+        wx.Frame.__init__(self, None,
+                        size=(250, 200))
+
+        nomeBox = wx.TextEntryDialog(None, 'Qual o seu nome?', 'Calculo do IMC - Indice de Massa Corporal', 'Seu Nome')
+        if nomeBox.ShowModal() == wx.ID_OK:
+            nome = nomeBox.GetValue()
+
+        enderecoBox = wx.TextEntryDialog(None, 'Endereco?', 'Calculo do IMC - Indice de Massa Corporal', 'Seu Endereco')
+        if enderecoBox.ShowModal() == wx.ID_OK:
+            endereco = enderecoBox.GetValue()
+
+        alturaBox = wx.TextEntryDialog(None, 'Coloque a sua Altura separada por PONTO:', 'Calculo do IMC - Indice de Massa Corporal', 'Sua Altura')
+        if alturaBox.ShowModal() == wx.ID_OK:
+            altura = float(alturaBox.GetValue())
+            a2 = float(altura*altura)
+
+        pesoBox = wx.TextEntryDialog(None, 'Agora o seu peso?','Calculo do IMC - Indice de Massa Corporal', 'Seu Peso')
+        if pesoBox.ShowModal() == wx.ID_OK:
+            peso = int(pesoBox.GetValue())
+
+        IMC = float(peso/a2)
+        print(IMC)
+
+        resultado = wx.MessageDialog(None, 'Nome do : %s\nEndereco Completo: %s\nAltura: %.2fm\nPeso: %dKg\n\nSeu IMC e: %.2f\n\nObrigado!\n'%(nome,endereco,altura,peso,IMC),'Calculo do IMC - Indice de Massa Corporal')
+        if resultado.ShowModal() == wx.ID_OK:
+            self.Destroy()
+        self.Show(True)
+
+app = wx.App()
+frame = Frame()
+app.MainLoop()
